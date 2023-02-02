@@ -1,6 +1,7 @@
 from kafka import KafkaConsumer
 import logging
 import pprint
+import json
 
 log = logging.getLogger("CONSUMER-LOG")
 logging.basicConfig(
@@ -26,4 +27,4 @@ log.info("#################### END ####################")
 for message in consumer:
     # message value and key are raw bytes -- decode if necessary!
     # e.g., for unicode: `message.value.decode('utf-8')`
-    log.info(message.value.decode(encoding='UTF-8', errors='strict'))
+    log.info(message.value.encode('ascii'))
