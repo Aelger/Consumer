@@ -4,8 +4,10 @@ import pprint
 import os
 
 log = logging.getLogger("CONSUMER-LOG")
-logging.basicConfig(level=logging.INFO)
-
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 topic = os.environ.get("TOPIC")
 bootstrap_server = os.environ.get("BOOTSTRAP_SERVER")
