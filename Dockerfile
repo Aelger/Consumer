@@ -1,5 +1,5 @@
 # Deriving the latest base image
-FROM registry.redhat.io/rhel8/python-39
+FROM registry.redhat.io/rhel8/python-38
 
 ENV TOPIC="Default topic"
 ENV BOOTSTRAP_SERVER="my-cluster-kafka-dos-kafka-bootstrap:9092"
