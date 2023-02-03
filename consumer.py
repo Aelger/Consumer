@@ -22,6 +22,7 @@ log.info(consumer.topics())
 log.info("#################### CONFIGS ####################")
 log.info(pprint.pformat(consumer.config))
 log.info("#################### END ####################")
+print("VAMOS BOCA!")
 
 
 for message in consumer:
