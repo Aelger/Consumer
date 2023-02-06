@@ -37,11 +37,12 @@ for message in consumer:
     for k, v in payload.items():
         v = str(v)
         if len(v) < 13:
-            decoded_string = base64.b64decode(v).decode("utf-8")
+            decoded_string = base64.b64decode(v).decode("ascii")
             try:
                 decoded_payload[k] = decimal.Decimal(decoded_string)
             except decimal.InvalidOperation:
             # Handle the error
+                log.error(decimal.InvalidOperation)
                 decoded_payload[k] = decoded_string
     print(
         f"Received message: topic={message.topic}, partition={message.partition}, offset={message.offset}, value={decoded_payload}"
