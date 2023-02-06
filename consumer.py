@@ -41,7 +41,4 @@ for message in consumer:
 
     value = message.value
     payload = json.loads(value)
-    EMISECC = base64.b64decode(payload['EMISECC'])
-    EMINREFE = base64.b64decode(payload['EMINREFE'])
-
-    log.info(f"Emisecc: {EMISECC}, Eminrefe{EMINREFE}")
+    log.info(payload)
