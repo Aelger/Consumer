@@ -3,19 +3,27 @@ import logging
 import pprint
 import json
 import os
+import base64
+
 
 log = logging.getLogger("CONSUMER-LOG")
 logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
+    format="%(asctime)s %(levelname)-8s %(message)s",
     level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S')
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 topic = os.environ.get("TOPIC")
-bootstrap_server = os.environ.get("BOOTSTRAP_SERVER")
+bootstrap_server = (
+    os.environ.get("BOOTSTRAP_SERVER")
+)
 
-
-consumer = KafkaConsumer(topic, bootstrap_servers=bootstrap_server, value_deserializer=lambda m: json.loads(m.decode('ascii')))
-
+consumer = KafkaConsumer(
+    topic,
+    bootstrap_servers=bootstrap_server,
+    group_id="my-group-id",
+    value_deserializer=lambda value: json.loads(value.decode("utf-8")),
+)
 
 log.info("#################### TOPICS ####################")
 log.info(consumer.topics())
@@ -25,6 +33,10 @@ log.info("#################### END ####################")
 
 
 for message in consumer:
-    # message value and key are raw bytes -- decode if necessary!
-    # e.g., for unicode: `message.value.decode('utf-8')`
-    message
+    payload = message.value["payload"]
+    decoded_payload = {
+        k: base64.b64decode(v).decode("utf-8") for k, v in payload.items()
+    }
+    log.info(
+        f"Received message: topic={message.topic}, partition={message.partition}, offset={message.offset}, value={decoded_payload}"
+    )
