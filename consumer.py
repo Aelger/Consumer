@@ -42,7 +42,7 @@ for message in consumer:
                 decoded_payload[k] = decimal.Decimal(decoded_string)
             except decimal.InvalidOperation:
             # Handle the error
-                decoded_payload[k] = None
+                decoded_payload[k] = decoded_string
     print(
         f"Received message: topic={message.topic}, partition={message.partition}, offset={message.offset}, value={decoded_payload}"
     )
