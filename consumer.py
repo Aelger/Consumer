@@ -16,7 +16,6 @@ logging.basicConfig(
 consumer = KafkaConsumer(
     topic,
     bootstrap_servers=bootstrap_server,
-    group_id='my-group',
 )
 
 log.info("#################### TOPICS ####################")
