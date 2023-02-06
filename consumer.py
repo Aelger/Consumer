@@ -4,6 +4,7 @@ import pprint
 import json
 import os
 import base64
+import decimal
 
 
 log = logging.getLogger("CONSUMER-LOG")
@@ -36,7 +37,7 @@ for message in consumer:
     for k, v in payload.items():
         v = str(v)
         if len(v) < 13:
-            decoded_payload[k] = int(base64.b64decode(v))
+            decoded_payload[k] = decimal.Decimal(base64.b64decode(v).decode('utf-8'))
     print(
         f"Received message: topic={message.topic}, partition={message.partition}, offset={message.offset}, value={decoded_payload}"
     )
