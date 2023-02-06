@@ -36,10 +36,12 @@ for message in consumer:
                                           value))
 """
 
+
 for message in consumer:
-    # message value and key are raw bytes -- decode if necessary!
-    decoded_value = json.loads(message.value.decode("utf-8"))
-    decoded_payload = base64.b64decode(decoded_value['payload']['EMISECC'])
-    log.info("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
-                                          message.offset, message.key,
-                                          decoded_payload))
+
+    value = message.value
+    payload = json.loads(value)
+    EMISECC = base64.b64decode(payload['EMISECC'])
+    EMINREFE = base64.b64decode(payload['EMINREFE'])
+
+    log.info(f"Emisecc: {EMISECC}, Eminrefe{EMINREFE}")
