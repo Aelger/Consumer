@@ -35,9 +35,8 @@ for message in consumer:
     decoded_payload = {}
     for k, v in payload.items():
         v = str(v)
-        if len(v)%4 == 0:
-            continue
-        decoded_payload[k] = base64.b64decode(v).decode("utf-8")
+        if len(v) < 13:
+            decoded_payload[k] = base64.b64decode(v).decode("utf-8")
     print(
         f"Received message: topic={message.topic}, partition={message.partition}, offset={message.offset}, value={decoded_payload}"
     )
