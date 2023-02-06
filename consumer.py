@@ -44,4 +44,4 @@ for message in consumer:
     EMISECC = base64.b64decode(payload['EMISECC'])
     EMINREFE = base64.b64decode(payload['EMINREFE'])
 
-    log.info(f"Emisecc: {EMISECC}, Eminrefe{EMINREFE}")
+    log.info(f"Emisecc: {EMISECC.encode('utf-8')}, Eminrefe{EMINREFE.encode('utf-8')}")
