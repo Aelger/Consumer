@@ -26,4 +26,4 @@ log.info(pprint.pformat(consumer.config))
 log.info("#################### END ####################")
 
 for message in consumer:
-    print(message.value.decode())
+    print(message.value.decode("utf-8"))
