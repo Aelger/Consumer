@@ -26,22 +26,6 @@ log.info("#################### CONFIGS ####################")
 log.info(pprint.pformat(consumer.config))
 log.info("#################### END ####################")
 
-"""
-for message in consumer:
-    # message value and key are raw bytes -- decode if necessary!
-    # e.g., for unicode: `message.value.decode('utf-8')`
-    value = json.loads(message.value.decode("utf-8"))
-    log.info("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
-                                          message.offset, message.key,
-                                          value))
-"""
-
 
 for message in consumer:
-
-    value = message.value
-    payload = json.loads(value)
-    EMISECC = base64.b64decode(payload['EMISECC'])
-    EMINREFE = base64.b64decode(payload['EMINREFE'])
-
-    log.info(f"Emisecc: {EMISECC.decode('ISO-8859-1')}, Eminrefe: {EMINREFE.decode('ISO-8859-1')}")
+    log.info(message.value.decode('UTF-8'))
