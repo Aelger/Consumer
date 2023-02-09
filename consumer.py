@@ -2,8 +2,7 @@ from kafka import KafkaConsumer
 import os
 import logging
 import pprint
-import json
-import base64
+
 
 topic = os.environ.get("TOPIC")
 bootstrap_server = os.environ.get("BOOTSTRAP_SERVER")
