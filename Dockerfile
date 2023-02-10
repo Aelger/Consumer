@@ -10,11 +10,12 @@ LABEL Maintainer="Alegre Sandoval"
 
 # Any working directory can be chosen as per choice like '/' or '/home' etc
 # I have chosen /usr/app/src
-WORKDIR /usr/app/src
+WORKDIR /usr/app
 
 
 # To COPY the remote file at working directory in container
-COPY consumer.py ./
+COPY src /
+
 # Now the structure looks like this '/usr/app/src/test.py'
 COPY requirements.txt ./
 
