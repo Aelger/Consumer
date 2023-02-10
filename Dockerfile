@@ -2,7 +2,7 @@
 FROM python:latest
 
 ENV TOPIC="Default topic"
-ENV BOOTSTRAP_SERVER="my-cluster-kafka-dos-kafka-bootstrap:9092"
+ENV BOOTSTRAP_SERVER="Default bootstrap"
 
 # Labels as key value pair
 LABEL Maintainer="Alegre Sandoval"

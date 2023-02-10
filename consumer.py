@@ -1,30 +1,30 @@
 from kafka import KafkaConsumer
 import os
-import logging
 import pprint
+from utils import parse, logger
+from dotenv import load_dotenv
 
 
-topic = os.environ.get("TOPIC")
+# load envars
+load_dotenv()
+
+logger = logger.getLogger()
+
 bootstrap_server = os.environ.get("BOOTSTRAP_SERVER")
-
-log = logging.getLogger("CONSUMER-LOG")
-logging.basicConfig(
-    format="%(asctime)s %(levelname)-8s %(message)s",
-    level=logging.INFO,
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
+topic = os.environ.get("TOPIC")
 
 consumer = KafkaConsumer(
     topic,
     bootstrap_servers=bootstrap_server,
 )
 
-log.info("#################### TOPICS ####################")
-log.info(consumer.topics())
-log.info("#################### CONFIGS ####################")
-log.info(pprint.pformat(consumer.config))
-log.info("#################### END ####################")
+logger.info("#################### TOPICS ####################")
+logger.info(consumer.topics())
+logger.info("#################### CONFIGS ####################")
+logger.info(pprint.pformat(consumer.config))
+logger.info("#################### END ####################")
 
 
 for message in consumer:
-    log.info(message.value.decode('UTF-8'))
+    to_print = parse.str_to_dict(message)
+    print(to_print)
