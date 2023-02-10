@@ -27,4 +27,4 @@ logger.info("#################### END ####################")
 
 for message in consumer:
     to_print = parse.str_to_dict(message)
-    print(to_print)
+    logger.info(to_print)
